@@ -1,0 +1,129 @@
+/* style.css - Sobre completo, centrado y efecto 3D */
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, #ffdee9, #b5fffc);
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+}
+
+.envelope {
+  position: relative;
+  width: 320px;
+  height: 200px;
+  cursor: pointer;
+  perspective: 1200px;
+  transition: transform 0.5s ease;
+}
+
+.envelope:hover {
+  transform: rotateX(10deg) rotateY(-10deg) scale(1.05);
+}
+
+.envelope.open:hover {
+  transform: rotateX(2deg) rotateY(2deg) scale(1.05);
+}
+
+/* Base del sobre - rectángulo completo */
+.base {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #e4aa4f, #d59742);
+  border-radius: 12px;
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+/* Profundidad 3D centrada con pseudo-elemento */
+.base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #d59742, #c48430);
+  border-radius: 12px;
+  z-index: -1;
+  transform: translate(0, 0) translateZ(-10px); /* centrado detrás de la base */
+}
+
+/* Tapa del sobre - triángulo */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(145deg, #e4aa4f, #d59742);
+  clip-path: polygon(0 0, 50% 50%, 100% 0);
+  transform-origin: top;
+  transition: transform 0.6s ease, box-shadow 0.3s ease;
+  z-index: 3;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Carta */
+.letter {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 100%);
+  width: 85%;
+  height: 350px;
+  background: #fffdf7;
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.35);
+  padding: 15px;
+  text-align: justify;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+
+  background-image: 
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 24px, rgba(245,245,245,0.9) 25px),
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.05) 1px, transparent 0);
+  background-size: 100% 25px, 15px 15px;
+  transition: top 1s ease, transform 1s ease, opacity 0.5s ease;
+}
+
+/* Animaciones al abrir */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  z-index: 5;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  animation: letterPop 2.5s ease forwards;
+}
+
+@keyframes letterPop {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  40% {
+    transform: translate(-50%, -120px) scale(1.03);
+  }
+  60% {
+    transform: translate(-50%, 25px) scale(1);
+  }
+  80% {
+    transform: translate(-50%, 10px) scale(1.02);
+  }
+  100% {
+    transform: translate(-50%, 15px) scale(1);
+  }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Felicitación</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="envelope" id="envelope">
+      <div class="base"></div>
+      <div class="flap"></div>
+      <div class="letter">
+        <p>
+          Para: Ximena❤<br><br>
+          Que tengas un feliz cumpleaños, espero que te la sigas pasando bien y disfrutes mucho hoy que es tu día. <br>Recuerda que eres una gran persona, fuerte, muy lista y de gran corazón, no dejes que nadie te diga lo contrario, siempre sonríe a la vida, y no importa que tan difícil sea la situación, siempre cambiara para bien.<br>Te mando un gran abarazo y muchos besos, espero poder verte pronto.😘😘😘😘<br>
+          Te Amo Mucho...❤
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const envelope = document.getElementById("envelope");
+    envelope.addEventListener("click", () => {
+      envelope.classList.toggle("open");
+    });
+  </script>
+</body>
+</html>
